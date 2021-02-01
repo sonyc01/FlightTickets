@@ -1,0 +1,7 @@
+{
+  "name": "FlightTickets",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
