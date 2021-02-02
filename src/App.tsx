@@ -8,6 +8,7 @@ import MainPage from './pages/MainPage'
 import DepartureSearch from "./pages/DepartureSearch"
 import DestinationSearch from './pages/DestinationSearch'
 import HistoryPage from './pages/HistoryPage'
+import {Plugins} from '@capacitor/core'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -50,6 +51,10 @@ const App: React.FC = () =>{
     setDestinationName,
     setDestinationIata,
   }
+
+  const {SplashScreen}=Plugins
+  SplashScreen.show({showDuration:2000,
+                    autoHide:true})
   
 return(
   <AppContext.Provider value={appData}>
