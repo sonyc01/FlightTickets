@@ -1,4 +1,4 @@
-import { IonContent, IonHeader,IonToolbar,IonTitle, IonPage,IonGrid, IonRow, IonCol,IonButton,IonIcon,IonInput, IonLabel,IonCard,IonDatetime, IonItem, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle,IonRange, IonRadioGroup, IonRadio } from '@ionic/react';
+import { IonContent, IonHeader,IonToolbar,IonTitle, IonPage,IonGrid, IonRow, IonCol,IonButton,IonIcon,IonInput, IonLabel,IonCard,IonDatetime, IonItem, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle,IonRange, IonRadioGroup, IonRadio,IonAlert } from '@ionic/react';
 import {search,calendar,book} from 'ionicons/icons'
 import React from 'react';
 
@@ -18,7 +18,10 @@ const MainPageTemplate=({
     direction,
     onDirectionChange,
     onSearchFlightsClick,
-    onHistoryClick})=>{
+    onHistoryClick,
+    showError,
+    onDismissClick,
+    errorMessage})=>{
 
     return(
         <IonPage>
@@ -109,10 +112,6 @@ const MainPageTemplate=({
                     </IonCardHeader>
                     <IonCardContent>
                         <IonRadioGroup value={direction} onIonChange={e=>onDirectionChange(e.detail.value)}>
-                            <IonItem disabled={true}>
-                                <IonLabel>One-Way</IonLabel>
-                                <IonRadio slot="start" value={true}/>
-                            </IonItem>
                             <IonItem>
                                 <IonLabel>Return</IonLabel>
                                 <IonRadio slot="start" value={false}/>
@@ -139,6 +138,15 @@ const MainPageTemplate=({
                         </IonRow>
                     </IonGrid>
                 </IonCard>
+                <IonAlert
+          isOpen={showError}
+          onDidDismiss={onDismissClick}
+          cssClass='my-custom-class'
+          header={'Alert'}
+          message={errorMessage}
+          buttons={['OK']}
+        />
+
             </IonContent>
         </IonPage>
     )

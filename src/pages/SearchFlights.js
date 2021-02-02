@@ -5,6 +5,9 @@ import Template from "../components/templates/SearchFlightsTemplate";
 
 const SearchFlights=()=>{
     const {goBack}=useHistory()
+
+    const[showBuy,setShowBuy]=useState(false)
+
     const{departureIata,
         destinationIata,
         departureDate,
@@ -12,8 +15,12 @@ const SearchFlights=()=>{
         travelerCount}=useParams()
 
     const flights=useSearchFlights(departureIata,destinationIata,departureDate,returnDate,travelerCount)
+
+    const handleOnBuyClick=()=>setShowBuy(true);
+    const handleDismissClick=()=>setShowBuy(false);
+
     return(
-    <Template searchData={flights}>
+    <Template searchData={flights} showBuy={showBuy} onBuyClick={handleOnBuyClick} onDismissClick={handleDismissClick}>
     </Template>
     )
 }

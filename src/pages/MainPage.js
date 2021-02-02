@@ -20,11 +20,25 @@ const MainPage=()=>{
     const [returnDate,setReturnDate]=useState(newDate)
     const [travelerCount,setTravelerCount]=useState(1)
     const [direction,setDirection]=useState(false)
+    const [showError,setShowError]=useState(false)
+    const [errorMessage,setErrorMessage]=useState("")
 
 //Navigation
     const handleOnDepartureSearchClick=()=>push('/DepartureSearch');
     const handleOnDestinationSearchClick=()=>push('/DestinationSearch');
-    const handleOnSearchFlightsClick=()=>push(`/SearchFlights/${myContext.departureIata}/${myContext.destinationIata}/${departureDate}/${returnDate}/${travelerCount}`)
+    const handleOnSearchFlightsClick=()=>{
+        if(myContext.departureIata==="" || myContext.destinationIata===""){
+            setErrorMessage("Missing Departure or Destination!")
+            setShowError(true)
+        }
+        else if(new Date(departureDate)>new Date(returnDate)){
+            setErrorMessage("Date missmatch!")
+            setShowError(true)
+        }
+        else{
+            push(`/SearchFlights/${myContext.departureIata}/${myContext.destinationIata}/${departureDate}/${returnDate}/${travelerCount}`)
+        }
+    }
     const handleOnHistoryClick=()=>push('/History')
 
 //Handlers
@@ -48,6 +62,7 @@ const MainPage=()=>{
     }
     const handleTravelerCountChange=(value)=>setTravelerCount(value)
     const handleDirectionChange=(value)=>setDirection(value)
+    const handleOnDismissClick=()=>setShowError(false)
 
     return(
         <Template
@@ -67,6 +82,9 @@ const MainPage=()=>{
         onDirectionChange={handleDirectionChange}
         onSearchFlightsClick={handleOnSearchFlightsClick}
         onHistoryClick={handleOnHistoryClick}
+        showError={showError}
+        errorMessage={errorMessage}
+        onDismissClick={handleOnDismissClick}
         />
     )
 }

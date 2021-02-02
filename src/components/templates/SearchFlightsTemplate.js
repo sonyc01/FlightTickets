@@ -1,15 +1,20 @@
 import React from 'react';
-import { IonContent, IonHeader,IonToolbar,IonTitle, IonPage,IonSpinner,IonText,IonGrid, IonRow, IonCol,IonButton,IonIcon,IonInput, IonLabel,IonCard,IonDatetime, IonItem, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle,IonRange, IonRadioGroup, IonRadio } from '@ionic/react';
+import { IonContent, IonHeader,IonToolbar,IonTitle, IonPage,IonSpinner,IonText,IonButtons,IonBackButton,IonAlert,IonGrid, IonRow, IonCol,IonButton,IonIcon,IonInput, IonLabel,IonCard,IonDatetime, IonItem, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle,IonRange, IonRadioGroup, IonRadio } from '@ionic/react';
+import FlightSegment from '../organisms/FlightSegment'
+import FlightItineraries from '../organisms/FlightItineraries';
+import FlightList from '../organisms/FlightList';
 
-const SearchFlightsTemplate=({searchData})=>{
+const SearchFlightsTemplate=({searchData,showBuy,onBuyClick,onDismissClick})=>{
     const renderSearch=()=>{
         const {data,isLoading,error}=searchData
         if(isLoading){
             return(
-                <>
+                <IonCard className="ion-text-center">
+                <IonText className="ion-text-center">
                 <h3>Loading</h3>
-                <IonSpinner name="circles"/>
-                </>
+                </IonText>
+                <IonSpinner className="ion-text-center" name="circles"/>
+                </IonCard>
             )
         }
         if(error){
@@ -20,8 +25,7 @@ const SearchFlightsTemplate=({searchData})=>{
             )
         }
         return(
-            <></>
-            //<SearchResult searchData={data} onResultClicked={onResultClicked}/>
+            <FlightList data={data} onBuyClick={onBuyClick}/>
         )
     }
 
@@ -30,11 +34,21 @@ const SearchFlightsTemplate=({searchData})=>{
         <IonPage>
             <IonHeader>
                 <IonToolbar>
+                <IonButtons slot="start">
+                        <IonBackButton/>
+                    </IonButtons>
                     <IonTitle>Flight Search</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
                 {renderSearch()}
+                <IonAlert
+                    isOpen={showBuy}
+                    onDidDismiss={onDismissClick}
+                    header={'Buy successful'}
+                    message={'This message simulates a buy action'}
+                    buttons={['OK']}
+                />
             </IonContent>
         </IonPage>
     )

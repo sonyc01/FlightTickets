@@ -4,7 +4,6 @@ import {airplaneOutline} from 'ionicons/icons'
 
 const SearchResult=({searchData,onResultClicked})=>{
     if(searchData.length>0){
-        console.log(searchData)
         return(
             <IonList>
                     {searchData.map((item)=>(

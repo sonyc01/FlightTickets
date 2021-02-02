@@ -15,7 +15,7 @@ const useSearchFlights=(departureIata,destinationIata,departureDate,returnDate,t
                     ...searchData,
                     isLoading:true,
                 });
-                const result=await axios.get(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${departureIata}&destinationLocationCode=${destinationIata}&departureDate=${departureDate}&returnDate=${returnDate}&adults=${travelerCount}&nonStop=true&max=20`,{
+                const result=await axios.get(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${departureIata}&destinationLocationCode=${destinationIata}&departureDate=${departureDate}&returnDate=${returnDate}&adults=${travelerCount}&nonStop=true&max=10`,{
                     headers:{
                         'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`
                     }
