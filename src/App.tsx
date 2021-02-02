@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import MainPage from './pages/MainPage'
 import DepartureSearch from "./pages/DepartureSearch"
 import DestinationSearch from './pages/DestinationSearch'
+import HistoryPage from './pages/HistoryPage'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -61,6 +62,7 @@ return(
         <Route path="/DepartureSearch" component={DepartureSearch}/>
         <Route path="/DestinationSearch" component={DestinationSearch}/>
         <Route path="/SearchFlights/:departureIata/:destinationIata/:departureDate/:returnDate/:travelerCount" component={SearchFlights}/>
+        <Route path="/History" component={HistoryPage}/>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

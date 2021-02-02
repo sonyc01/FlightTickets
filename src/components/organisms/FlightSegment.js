@@ -5,7 +5,6 @@ import arrivalIcon from "../../icons/arrivals.svg"
 
 
 const FlightSegment=({segments})=>{
-    //console.log(segments)
     if(segments!=undefined){
     return(
         <IonList>

@@ -5,7 +5,6 @@ import FlightSegment from './FlightSegment';
 
 const FlightItineraries=({data,onBuyClick})=>{
     if(data!=undefined){
-        //console.log(data[0].itineraries)
         return(
             <>
             <IonCard className="ion-text-center">

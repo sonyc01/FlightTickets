@@ -8,6 +8,34 @@ const MainPage=()=>{
     //Capacitor
     const{Storage}=Plugins
 
+    const saveInStorage=async()=>{
+        let temp={
+            departureName:myContext.departureName,
+            departureIata:myContext.departureIata,
+            destinationName:myContext.destinationName,
+            destinationIata:myContext.destinationIata,
+            departureDate:departureDate,
+            returnDate:returnDate,
+            travelerCount:travelerCount,
+            direction:direction
+        }
+        const history=await Storage.get({key:'history'})
+        let historyFromStorage=JSON.parse(history.value)
+        if(historyFromStorage===null){
+            console.log("NIC neulozene")
+            await Storage.set({
+                key:'history',
+                value:"[]"
+            })
+            historyFromStorage=await Storage.get({key:'history'})
+            historyFromStorage=JSON.parse(historyFromStorage.value)
+        }
+        await Storage.set({
+            key:'history',
+            value:JSON.stringify([...historyFromStorage,temp])
+        })
+    }
+
 
     //Context
     const myContext=useContext(AppContext)
@@ -26,7 +54,7 @@ const MainPage=()=>{
 //Navigation
     const handleOnDepartureSearchClick=()=>push('/DepartureSearch');
     const handleOnDestinationSearchClick=()=>push('/DestinationSearch');
-    const handleOnSearchFlightsClick=()=>{
+    const handleOnSearchFlightsClick=async()=>{
         if(myContext.departureIata==="" || myContext.destinationIata===""){
             setErrorMessage("Missing Departure or Destination!")
             setShowError(true)
@@ -36,6 +64,7 @@ const MainPage=()=>{
             setShowError(true)
         }
         else{
+            await saveInStorage()
             push(`/SearchFlights/${myContext.departureIata}/${myContext.destinationIata}/${departureDate}/${returnDate}/${travelerCount}`)
         }
     }
