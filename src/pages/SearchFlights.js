@@ -1,10 +1,9 @@
 import React,{useState} from 'react'
-import {useParams,useHistory} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import useSearchFlights from '../hooks/useSearchFlights'
 import Template from "../components/templates/SearchFlightsTemplate";
 
 const SearchFlights=()=>{
-    const {goBack}=useHistory()
 
     const[showBuy,setShowBuy]=useState(false)
 

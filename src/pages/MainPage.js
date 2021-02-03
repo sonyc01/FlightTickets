@@ -1,6 +1,6 @@
 import React,{useState,useContext} from 'react';
 import AppContext from '../components/AppContext'
-import {useHistory,useParams} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import Template from "../components/templates/MainPageTemplate";
 import {Plugins} from '@capacitor/core'
 
@@ -22,7 +22,6 @@ const MainPage=()=>{
         const history=await Storage.get({key:'history'})
         let historyFromStorage=JSON.parse(history.value)
         if(historyFromStorage===null){
-            console.log("NIC neulozene")
             await Storage.set({
                 key:'history',
                 value:"[]"
