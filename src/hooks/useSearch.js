@@ -1,7 +1,9 @@
 import {useEffect,useState} from 'react';
 import axios from 'axios';
+import {Plugins} from '@capacitor/core'
 
 const useSearch=(keyword)=>{
+    const {Storage}=Plugins
     const [searchData,setSearchData]=useState({
         data:{},
         isLoading: false,
@@ -15,9 +17,11 @@ const useSearch=(keyword)=>{
                     ...searchData,
                     isLoading:true,
                 });
+                const access_tokenData=await Storage.get({key:'access_token'})
+                const access_token=access_tokenData.value
                 const result=await axios.get(`https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=${keyword}`,{
                     headers:{
-                        'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`
+                        'Authorization': `Bearer ${access_token}`
                     }
                 }
                 

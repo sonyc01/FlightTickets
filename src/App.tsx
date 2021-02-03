@@ -9,6 +9,7 @@ import DepartureSearch from "./pages/DepartureSearch"
 import DestinationSearch from './pages/DestinationSearch'
 import HistoryPage from './pages/HistoryPage'
 import {Plugins} from '@capacitor/core'
+import useToken from './hooks/useToken'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -39,6 +40,7 @@ const App: React.FC = () =>{
   const [departureIata,setDepartureIata]=useState("")
   const [destinationName,setDestinationName]=useState("")
   const [destinationIata,setDestinationIata]=useState("")
+  const token=useToken()
 
 
   const appData={
@@ -52,9 +54,6 @@ const App: React.FC = () =>{
     setDestinationIata,
   }
 
-  const {SplashScreen}=Plugins
-  SplashScreen.show({showDuration:2000,
-                    autoHide:true})
   
 return(
   <AppContext.Provider value={appData}>
